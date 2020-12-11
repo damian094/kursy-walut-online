@@ -133,7 +133,7 @@ class App {
                     for (let i = 0; i < currency.length; i++) {
                         new Promise((resolve, reject) => {
                                 superagent
-                                    .get(`http://api.nbp.pl/api/exchangerates/rates/A/${currency[i]}`)
+                                    .get(`https://api.nbp.pl/api/exchangerates/rates/A/${currency[i]}`)
                                     .end((err, res) => {
                                         solveRequest(err, res, resolve, reject, currency[i]);
                                     })
