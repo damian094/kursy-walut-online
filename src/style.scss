@@ -52,7 +52,7 @@ body {
                 }
 
                 .currency {
-                    font-size: .7em;
+                    font-size: .6em;
                     align-self: center;
                 }
             }
@@ -77,11 +77,11 @@ body {
 
 @media(max-width: 767px) {
     body {
-        font-size: 15px;
+        font-size: 17px;
 
         header {
             h1 {
-                font-size: 2.6em;
+                font-size: 2.3em;
             }
         }
 
@@ -90,7 +90,7 @@ body {
                 p:nth-of-type(1) {
                     .icon {
                         display: block;
-                        width: 25px;
+                        width: 30px;
                     }
                 }
             }
