@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Kursy walut online</h1>
+    </header>
+    <main>
+        <section class="mainCurrency">
+            <div data-currency="EUR"></div>
+            <div data-currency="USD"></div>
+            <div data-currency="GBP"></div>
+            <div data-currency="CHF"></div>
+        </section>
+    </main>
+    <script
+        src="https://polyfill.io/v3/polyfill.min.js?features=Array.from,Promise,Symbol,Object.setPrototypeOf,Object.getOwnPropertySymbols,Set">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/superagent"></script>
+    <script src="src/index.js" type="text/javascript"></script>
+</body>
+
+</html>

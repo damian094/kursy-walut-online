@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+
+    header {
+        text-align: center;
+        background-color: #111;
+
+        h1 {
+            padding: 10px;
+            font-size: 3.5em;
+            color:#B29700;
+            border-bottom: 2px solid;
+        }
+    }
+
+    main {
+        padding: 20px;
+        flex-grow: 1;
+        background-color: #333;
+
+        div {
+            padding: 13px;
+            text-align: center;
+            color: #ddd;
+
+            p:nth-of-type(1) {
+                font-size: 1.4em;
+                padding-bottom: 5px;
+                display: flex;
+                justify-content: center;
+
+                .icon {
+                    display: block;
+                    width: 35px;
+                    background-size: cover;
+                    background-position: center;
+                    filter: saturate(.8);
+                    margin-right: 5px;
+                    border: 1px solid black;
+                    border-radius: 50%;
+                }
+
+                .currency {
+                    font-size: .7em;
+                    align-self: center;
+                }
+            }
+
+            p:nth-of-type(2) {
+                font-size: 1.1em;
+
+                .exchange {
+                    // color: green;
+                    font-weight: bold;
+                    font-size: .9em;
+                }
+            }
+
+            p:nth-of-type(3) {
+                font-size: .7em;
+                color:#B29700;
+            }
+        }
+    }
+}
+
+@media(max-width: 767px) {
+    body {
+        font-size: 14px;
+
+        header {
+            h1 {
+                font-size: 2.8em;
+            }
+        }
+
+        main {
+            div {
+                p:nth-of-type(1) {
+                    .icon {
+                        display: block;
+                        width: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
