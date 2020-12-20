@@ -7,69 +7,194 @@
 
 body {
     min-height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
     font-size: 20px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
 
     header {
-        text-align: center;
+        position: relative;
         background-color: #111;
+        color: #B29700;
+        border-bottom: 2px solid;
 
         h1 {
-            padding: 10px;
-            font-size: 3.5em;
-            color:#B29700;
-            border-bottom: 2px solid;
+            font-size: 3em;
+            padding: 15px 0 10px 80px;
+        }
+
+        nav {
+            position: absolute;
+            right: 10px;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+
+            a {
+                display: block;
+                padding: 0 15px;
+                margin-right: 30px;
+                font-size: 2em;
+                color: #bbb;
+                transition: .1s;
+
+                &:hover {
+                    transform: scale(1.15);
+                    color: #B29700;
+                }
+            }
         }
     }
 
     main {
-        padding: 20px;
-        flex-grow: 1;
-        background-color: #333;
+        padding: 20px 0;
+        background-color: #222;
 
-        div {
-            padding: 13px;
-            text-align: center;
-            color: #ddd;
+        #mainContainer {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            height: 100%;
 
-            p:nth-of-type(1) {
-                font-size: 1.4em;
-                padding-bottom: 5px;
+            .currencyContainer {
                 display: flex;
-                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                padding: 13px;
+                text-align: center;
+                color: #ddd;
+                flex-basis: 33.333%;
+                min-width: 350px;
 
-                .icon {
-                    display: block;
-                    width: 35px;
-                    background-size: cover;
-                    background-position: center;
-                    filter: saturate(.8);
-                    margin-right: 5px;
-                    border: 1px solid black;
-                    border-radius: 50%;
+                .mainInfo {
+                    padding-bottom: 40px;
+
+                    p:nth-of-type(1) {
+                        font-size: 1.5em;
+                        padding-bottom: 5px;
+                        display: flex;
+                        justify-content: center;
+
+                        .icon {
+                            display: block;
+                            width: 35px;
+                            background-size: cover;
+                            background-position: center;
+                            filter: saturate(.8);
+                            margin-right: 5px;
+                            border: 1px solid black;
+                            border-radius: 50%;
+                            background-color: black;
+                        }
+
+                        .currency {
+                            font-size: .7em;
+                            align-self: center;
+                        }
+                    }
+
+                    p:nth-of-type(2) {
+                        font-size: 1.3em;
+
+                        .exchange {
+                            // color: green;
+                            font-weight: bold;
+                            font-size: 1em;
+                        }
+                    }
+
+                    p:nth-of-type(3) {
+                        font-size: .8em;
+                        color: #B29700;
+                    }
                 }
 
-                .currency {
-                    font-size: .6em;
-                    align-self: center;
+                .otherInfo {
+                    width: auto;
+                    flex-grow: 1;
+                    padding: 0 10px 50px;
+                    -webkit-box-shadow: 3px 4px 12px 8px rgba(0,0,0,0.72); 
+                    box-shadow: 3px 4px 12px 8px rgba(0,0,0,0.72);
+                    background-color: #333333;
+                    border-radius: 30px;
+                    position: relative;
+                    overflow: hidden;
+                    transition: .6s;
+
+                    &.enableBlur>* {
+                        filter: blur(1.5px);
+
+                        &.chart {
+                            filter: blur(0);
+                            color: #ccc;
+                        }
+                    }
+
+                    &.hidden {
+                        flex-grow: 0;
+                        height: 100px;
+                    }
+
+                    h2 {
+                        color: #B29700;
+                        padding: 20px 0px;
+                        font-size: 1.4em;
+                    }
+
+                    p {
+                        font-size: .85em;
+                        padding-bottom: 6px;
+
+                        .lastRate {
+                            font-weight: bold;
+                        }
+                    }
+
+                    button {
+                        background-color: #111;
+                        border: 0;
+                        color: #B29700;
+                        cursor: pointer;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &.switch {
+                            display: block;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            height: 40px;
+                            width: 100%;
+                            border-top: 2px solid;
+                            font-size: 1.2em;
+                            transition: .3s;
+
+                            i {
+                                transition: .2s;
+                            }
+
+                            &:hover i {
+                                transform: rotate(360deg);
+                                color: #bbb;
+                            }
+
+                            &.rotate i {
+                                transform: rotate(180deg);
+                            }
+                        }
+
+                        &.chart {
+                            background-color: transparent;
+                            margin-top: 30px;
+                            padding: 5px 50px 30px;
+                            font-size: 1.1em;
+                            font-weight: bold;
+                        }
+                    }
                 }
-            }
-
-            p:nth-of-type(2) {
-                font-size: 1.1em;
-
-                .exchange {
-                    // color: green;
-                    font-weight: bold;
-                    font-size: .9em;
-                }
-            }
-
-            p:nth-of-type(3) {
-                font-size: .7em;
-                color:#B29700;
             }
         }
     }
@@ -77,20 +202,28 @@ body {
 
 @media(max-width: 767px) {
     body {
-        font-size: 17px;
+        font-size: 16px;
 
         header {
             h1 {
-                font-size: 2.3em;
+                font-size: 1.85em;
+                padding: 15px 3px 5px;
+                text-align: center;
             }
         }
 
         main {
-            div {
-                p:nth-of-type(1) {
-                    .icon {
-                        display: block;
-                        width: 30px;
+            #mainCurrency {
+                .currencyContainer {
+                    flex-basis: 100%;
+
+                    .mainInfo {
+                        p:nth-of-type(1) {
+                            .icon {
+                                display: block;
+                                width: 25px;
+                            }
+                        }
                     }
                 }
             }

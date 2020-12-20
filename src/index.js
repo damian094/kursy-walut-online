@@ -1,153 +1,125 @@
-// const createElement = (err, res, resolve, reject) => {
-//     if (err) throw reject(new Error('Nie znaleziono strony. Error 404'));
-//     console.log(res.status, res.body.code, res.body.rates[0].mid, res.body.rates[0].effectiveDate);
-//     resolve();
+// class App {
+//     constructor() {
+//         this.data = [];
+//         this.uploadingDate;
+
+//         const getData = () => {
+//             return new Promise((resolve) => {
+//                 axios.get(`https://api.nbp.pl/api/exchangerates/tables/a/`)
+//                     .then(res => {
+//                         this.data = res.data[0].rates;
+//                         this.uploadingDate = res.data[0].effectiveDate;
+//                         resolve();
+//                     })
+//                     .catch(err => alert(err))
+//             })
+//         }
+//         getData()
+//             .then(() => {
+//                 this.render('eur', 15);
+//                 this.render('gbp', 15);
+//                 this.render('usd', 15);
+//                 this.render('chf', 15);
+//             });
+
+
+//         this.getLastRates = (currencyCode, days) => {
+//             return new Promise((resolve, reject) => {
+//                 axios.get(`https://api.nbp.pl/api/exchangerates/rates/A/${currencyCode}/last/${days}/`)
+//                     .then(res => {
+//                         resolve(res.data.rates)
+//                     })
+//                     .catch(err => reject(err))
+//             })
+//         }
+
+//         this.render = (currencyCode, days) => {
+//             const currentCurrency = this.data.find(data => data.code === currencyCode.toUpperCase());
+//             if (currentCurrency) {
+//                 const {
+//                     currency,
+//                     code,
+//                     mid
+//                 } = currentCurrency
+
+//                 const mainContainer = document.querySelector(`#mainContainer`);
+//                 const currencyContainer = document.createElement('div');
+//                 currencyContainer.classList.add('currencyContainer');
+//                 currencyContainer.dataset.currency = code;
+//                 mainContainer.appendChild(currencyContainer);
+
+//                 currencyContainer.appendChild(document.createElement('div')).classList.add('mainInfo', `${code}`);
+//                 currencyContainer.appendChild(document.createElement('div')).classList.add('otherInfo', `${code}`);
+
+//                 const mainInfoDiv = document.querySelector(`div.mainInfo.${code}`);
+//                 mainInfoDiv.innerHTML = `
+//                 <p><span class="icon" style="background-image: url(images/${code}.png);"></span>${code}<span class="currency">(${currency})<span></ p>
+//                 <p>Kurs: <span class="exchange">${mid.toFixed(4)}</span></p>
+//                 <p class="updateDate">Dane z ${this.uploadingDate}</p>`
+
+//                 let lastRates = []
+//                 new Promise(resolve => {
+//                         this.getLastRates(currencyCode, days)
+//                             .then(res => {
+//                                 lastRates = res;
+//                                 lastRates.length = lastRates.length - 1;
+//                                 lastRates.reverse();
+//                                 resolve();
+//                             })
+//                             .catch()
+//                     })
+//                     .then(() => {
+//                         const otherInfoDiv = document.querySelector(`div.otherInfo.${code}`);
+//                         otherInfoDiv.appendChild(document.createElement('h2')).textContent = 'Ostatnie notowania'
+//                         for (let i = 0; i < lastRates.length; i++) {
+//                             const {
+//                                 effectiveDate,
+//                                 mid
+//                             } = lastRates[i];
+//                             const newP = document.createElement('p');
+//                             otherInfoDiv.appendChild(newP).innerHTML = `<span class="lastRate">${mid.toFixed(4)}</span> <span class="lastDate">(${effectiveDate})</span>`
+//                         }
+//                         const chartBtn = document.createElement('button');
+//                         chartBtn.innerHTML = 'Pokaż wykres <i class="fas fa-chart-line"></i>';
+//                         otherInfoDiv.appendChild(chartBtn).classList.add('chart');
+
+//                         const switchBtn = document.createElement('button');
+//                         switchBtn.innerHTML = '<i class="fas fa-arrow-circle-up"></i>';
+//                         otherInfoDiv.appendChild(switchBtn).classList.add('switch');
+//                         switchBtn.addEventListener('click', function () {
+//                             otherInfoDiv.classList.toggle('hidden');
+//                             this.classList.toggle('rotate');
+//                         })
+//                     })
+
+
+//             } else {
+//                 console.log('Wybrana waluta nie istnieje lub nie ma jej w bazie danych')
+//             }
+//         }
+//     }
 // }
 
-// const getAPI = () => {
-//     return new Promise((resolve, reject) => {
-//             superagent
-//                 .get('http://api.nbp.pl/api/exchangerates/rates/A/EUR')
-//                 .end((err, res) => {
-//                     createElement(err, res, resolve, reject);
-//                 })
 
-//             // superagent
-//             //     .get('http://api.nbp.pl/api/exchangerates/rates/A/GBP')
-//             //     .end((err, res) => {
-//             //         createElement(err, res, resolve, reject);
-//             //     })
-//             // superagent
-//             //     .get('http://api.nbp.pl/api/exchangerates/rates/A/CHF')
-//             //     .end((err, res) => {
-//             //         createElement(err, res, resolve, reject);
-//             //     })
-
-//         })
-//         .then(() => {
-//             return new Promise((resolve, reject) => {
-//                 superagent
-//                     .get('http://api.nbp.pl/api/exchangerates/rates/A/USD')
-//                     .end((err, res) => {
-//                         createElement(err, res, resolve, reject);
-//                     })
-//             })
-//             .catch(()=>console.log('nok USD'))
-
-//         })
-//         .then(() => {
-//             return new Promise((resolve, reject) => {
-//                 superagent
-//                     .get('http://api.nbp.pl/api/exchangerates/rates/A/GBP')
-//                     .end((err, res) => {
-//                         createElement(err, res, resolve, reject);
-//                     })
-//             })
-
-//         })
-//         .then(() => {
-//             return new Promise((resolve, reject) => {
-//                 superagent
-//                     .get('http://api.nbp.pl/api/exchangerates/rates/A/CHF')
-//                     .end((err, res) => {
-//                         createElement(err, res, resolve, reject);
-//                     })
-//             })
-
-//         })
-//         .then(() => console.log('ok'))
-//         .catch(() => console.log('nok'))
-
-// }
+// const app = new App();
 
 
-// const getAPI = () => {
-//     new Promise((resolve, reject) => {
-//             superagent
-//                 .get('http://api.nbp.pl/api/exchangerates/rates/A/EUR')
-//                 .end((err, res) => {
-//                     createElement(err, res, resolve, reject);
-//                 })
-//         })
-//         .then(resolve => console.log(resolve))
-//         .catch(reject => console.log(reject, 'nok EUR'))
+import Data from './js/data.js';
+import DOM from './js/dom.js';
+import RenderCurrencyContainer from './js/renderContainer.js';
 
-//     new Promise((resolve, reject) => {
-//             superagent
-//                 .get('http://api.nbp.pl/api/exchangerates/rates/A/GBP')
-//                 .end((err, res) => {
-//                     createElement(err, res, resolve, reject);
-//                 })
-//         })
-//         .then(resolve => console.log(resolve))
-//         .catch(reject => console.log(reject, 'nok GBP'))
-
-//         new Promise((resolve, reject) => {
-//             superagent
-//                 .get('http://api.nbp.pl/api/exchangerates/rates/A/CHF')
-//                 .end((err, res) => {
-//                     createElement(err, res, resolve, reject);
-//                 })
-//         })
-//         .then(resolve => console.log(resolve))
-//         .catch(reject => console.log(reject, 'nok CHF'))
-
-//         new Promise((resolve, reject) => {
-//             superagent
-//                 .get('http://api.nbp.pl/api/exchangerates/rates/A/USD')
-//                 .end((err, res) => {
-//                     createElement(err, res, resolve, reject);
-//                 })
-//         })
-//         .then(resolve => console.log(resolve))
-//         .catch(reject => console.log(reject, 'nok USD'))
-
-//     // superagent
-//     //     .get('http://api.nbp.pl/api/exchangerates/rates/A/GBP')
-//     //     .end((err, res) => {
-//     //         createElement(err, res, resolve, reject);
-//     //     })
-//     // superagent
-//     //     .get('http://api.nbp.pl/api/exchangerates/rates/A/CHF')
-//     //     .end((err, res) => {
-//     //         createElement(err, res, resolve, reject);
-//     //     })
-
-// }
 
 class App {
     constructor() {
-        const currency = ['EUR', 'GBP', 'USD', 'CHF'];
-        let requestCounter = 0;
-        const solveRequest = (err, res, resolve, reject, currentCurrency) => {
-            if (err) return reject(new Error('Nie znaleziono strony. Error 404'));
-            console.log(res.status, res.body.currency, res.body.code, res.body.rates[0].mid, res.body.rates[0].effectiveDate);
-            const mainCurrencyDivs = [...document.querySelectorAll('.mainCurrency>div')];
-            const currentDiv = mainCurrencyDivs.find(div => div.dataset.currency === currentCurrency);
-            console.log(currentDiv)
-            currentDiv.innerHTML = `<p><span class="icon" style="background-image: url(images/${currentCurrency}.png);"></span>${res.body.code}<span class="currency">(${res.body.currency})</span></p><p>Kurs: <span class="exchange">${res.body.rates[0].mid.toFixed(4)}</span></p><p class="updateDate">Dane z ${res.body.rates[0].effectiveDate}</p>`
-            resolve(++requestCounter);
-        }
-        this.render = () => {
-            new Promise(resolve => {
-                    for (let i = 0; i < currency.length; i++) {
-                        new Promise((resolve, reject) => {
-                                superagent
-                                    .get(`https://api.nbp.pl/api/exchangerates/rates/A/${currency[i]}`)
-                                    .end((err, res) => {
-                                        solveRequest(err, res, resolve, reject, currency[i]);
-                                    })
-                            })
-                            .then(resolvedRequestNumber => {
-                                console.log(`OK ${currency[i]}`);
-                                resolvedRequestNumber === currency.length ? resolve() : undefined;
-                            })
-                            .catch(reject => console.log(reject, `NOK ${currency[i]}`));
-                    }
-                })
-                .then(() => console.log('Koniec'))
-        }
-        this.render()
+        this.data = new Data();
+        this.data.getCurrentRates()
+            .then(() => {
+                this.currencyContainer.render.bind(this, 'eur', 15)();
+                this.currencyContainer.render.bind(this, 'gbp', 15)();
+                this.currencyContainer.render.bind(this, 'chf', 15)();
+            });
+        this.dom = new DOM();
+        this.currencyContainer = new RenderCurrencyContainer();
     }
 }
 
