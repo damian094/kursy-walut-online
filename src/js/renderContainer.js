@@ -2,7 +2,7 @@ export default class RenderCurrencyContainer {
     constructor() {
         const getCurrencyData = function (currencyCode) {
             return this.data.currentRates.find(data => data.code === currencyCode.toUpperCase())
-        };
+        }
 
         const createContainer = code => {
             const mainContainer = document.querySelector(`#mainContainer`);
@@ -25,11 +25,10 @@ export default class RenderCurrencyContainer {
 
         const setBacklightColor = (rates, i) => {
             if (i > 0) {
-                return rates[i].mid > rates[i - 1].mid ? '#43a047' : '#ff5252'
+                return rates[i].mid > rates[i - 1].mid ? '#43a047' : '#ff2400'
             } else {
                 return '#ccc'
             }
-
         }
 
         const createOhterInfo = function (code, days) {
@@ -41,7 +40,6 @@ export default class RenderCurrencyContainer {
                             lastRates.length = lastRates.length - 1;
                             resolve();
                         })
-                        .catch()
                 })
                 .then(() => {
                     const otherInfoDiv = document.querySelector(`div.otherInfo.${code}`);
@@ -54,6 +52,7 @@ export default class RenderCurrencyContainer {
                         const newP = document.createElement('p');
                         otherInfoDiv.appendChild(newP).innerHTML = `<span class="lastRate" style="color: ${setBacklightColor(lastRates, i)};">${mid.toFixed(4)}</span> <span class="lastDate">(${effectiveDate})</span>`;
                     }
+                    
                     const chartBtn = document.createElement('button');
                     chartBtn.innerHTML = 'Pokaż wykres <i class="fas fa-chart-line"></i>';
                     otherInfoDiv.appendChild(chartBtn).classList.add('chart');
@@ -72,7 +71,6 @@ export default class RenderCurrencyContainer {
                         this.classList.toggle('rotate');
                     })
                 })
-
         }
 
         this.render = function (currencyCode, days) {
@@ -87,7 +85,7 @@ export default class RenderCurrencyContainer {
                 createMainInfo.bind(this, code, currency, mid)();
                 createOhterInfo.bind(this, code, days)();
             } else {
-                console.log(`Waluta "${currencyCode}" nie istnieje lub nie ma jej w bazie danych`);
+                alert(`Currency "${currencyCode}" not exist in database`);
             }
         }
     }

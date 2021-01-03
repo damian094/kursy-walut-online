@@ -1,9 +1,45 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Courier New', Courier, monospace;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+@-webkit-keyframes showContainer {
+  0% {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes showContainer {
+  0% {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes hideContainer {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+  }
+}
+
+@keyframes hideContainer {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+  }
 }
 
 body {
@@ -15,18 +51,34 @@ body {
       grid-template-columns: 100%;
   -ms-grid-rows: auto 1fr;
       grid-template-rows: auto 1fr;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+body canvas#background {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  z-index: -1;
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
+  background-color: #252525;
 }
 
 body header {
   position: relative;
-  background-color: #111;
-  color: #B29700;
   border-bottom: 2px solid;
+  background-color: #111111;
+  color: #B29700;
 }
 
 body header h1 {
-  font-size: 3em;
-  padding: 15px 0 10px 80px;
+  padding: 5px 0 0 30px;
+  font-size: 2.7em;
+  letter-spacing: -1px;
+  word-spacing: 5px;
 }
 
 body header nav {
@@ -46,7 +98,7 @@ body header nav a {
   display: block;
   padding: 0 15px;
   margin-right: 30px;
-  font-size: 2em;
+  font-size: 1.9em;
   color: #bbb;
   -webkit-transition: .1s;
   transition: .1s;
@@ -56,11 +108,6 @@ body header nav a:hover {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
   color: #B29700;
-}
-
-body main {
-  padding: 20px 0;
-  background-color: #222;
 }
 
 body main #mainContainer {
@@ -86,46 +133,50 @@ body main #mainContainer .currencyContainer {
       -ms-flex-align: center;
           align-items: center;
   padding: 13px;
-  text-align: center;
-  color: #ddd;
   -ms-flex-preferred-size: 33.333%;
       flex-basis: 33.333%;
   min-width: 350px;
+  padding: 40px 0;
+  text-align: center;
+  color: #ddd;
+  -webkit-animation: .4s showContainer linear both;
+          animation: .4s showContainer linear both;
 }
 
 body main #mainContainer .currencyContainer .mainInfo {
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) {
-  font-size: 1.5em;
-  padding-bottom: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5em;
 }
 
 body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) .icon {
   display: block;
-  width: 35px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: 1px solid black;
+  border-radius: 50%;
   background-size: cover;
   background-position: center;
   -webkit-filter: saturate(0.8);
           filter: saturate(0.8);
-  margin-right: 5px;
-  border: 1px solid black;
-  border-radius: 50%;
   background-color: black;
 }
 
 body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) .currency {
-  font-size: .7em;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  padding-left: 7px;
+  font-size: .65em;
 }
 
 body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(2) {
@@ -138,21 +189,21 @@ body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(2) .exchange
 }
 
 body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(3) {
-  font-size: .8em;
   color: #B29700;
+  font-size: .8em;
 }
 
 body main #mainContainer .currencyContainer .otherInfo {
+  position: relative;
   width: auto;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  padding: 0 10px 50px;
-  -webkit-box-shadow: 3px 4px 12px 8px rgba(0, 0, 0, 0.72);
-  box-shadow: 3px 4px 12px 8px rgba(0, 0, 0, 0.72);
-  background-color: #333333;
-  border-radius: 30px;
-  position: relative;
+  padding: 0 25px 40px;
+  border-radius: 10px;
+  -webkit-box-shadow: 3px 4px 12px 12px rgba(0, 0, 0, 0.72);
+          box-shadow: 3px 4px 12px 12px rgba(0, 0, 0, 0.72);
+  background-color: rgba(20, 20, 20, 0.5);
   overflow: hidden;
   -webkit-transition: .6s;
   transition: .6s;
@@ -166,33 +217,37 @@ body main #mainContainer .currencyContainer .otherInfo.enableBlur > * {
 body main #mainContainer .currencyContainer .otherInfo.enableBlur > *.chart {
   -webkit-filter: blur(0);
           filter: blur(0);
-  color: #ccc;
+  color: #bbb;
 }
 
 body main #mainContainer .currencyContainer .otherInfo.hidden {
   -webkit-box-flex: 0;
       -ms-flex-positive: 0;
           flex-grow: 0;
-  height: 100px;
+  height: 80px;
 }
 
 body main #mainContainer .currencyContainer .otherInfo h2 {
   color: #B29700;
-  padding: 20px 0px;
+  line-height: 50px;
   font-size: 1.4em;
 }
 
 body main #mainContainer .currencyContainer .otherInfo p {
-  font-size: .85em;
-  padding-bottom: 6px;
+  font-size: .8em;
 }
 
 body main #mainContainer .currencyContainer .otherInfo p .lastRate {
+  padding-right: 10px;
   font-weight: bold;
 }
 
+body main #mainContainer .currencyContainer .otherInfo p .lastDate {
+  font-size: 0.85em;
+}
+
 body main #mainContainer .currencyContainer .otherInfo button {
-  background-color: #111;
+  background-color: #111111;
   border: 0;
   color: #B29700;
   cursor: pointer;
@@ -207,10 +262,10 @@ body main #mainContainer .currencyContainer .otherInfo button.switch {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 40px;
+  height: 30px;
   width: 100%;
   border-top: 2px solid;
-  font-size: 1.2em;
+  font-size: 1em;
   -webkit-transition: .3s;
   transition: .3s;
 }
@@ -232,29 +287,90 @@ body main #mainContainer .currencyContainer .otherInfo button.switch.rotate i {
 }
 
 body main #mainContainer .currencyContainer .otherInfo button.chart {
-  background-color: transparent;
   margin-top: 30px;
-  padding: 5px 50px 30px;
+  padding: 5px 20px 20px;
+  background-color: transparent;
   font-size: 1.1em;
   font-weight: bold;
 }
 
-@media (max-width: 767px) {
-  body {
-    font-size: 16px;
-  }
-  body header h1 {
-    font-size: 1.85em;
-    padding: 15px 3px 5px;
-    text-align: center;
-  }
-  body main #mainCurrency .currencyContainer {
-    -ms-flex-preferred-size: 100%;
-        flex-basis: 100%;
-  }
-  body main #mainCurrency .currencyContainer .mainInfo p:nth-of-type(1) .icon {
-    display: block;
-    width: 25px;
-  }
+body main #mainContainer #searchFormContainer {
+  display: none;
+  height: 500px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #ddd;
+}
+
+body main #mainContainer #searchFormContainer * {
+  outline: none;
+}
+
+body main #mainContainer #searchFormContainer h2 {
+  padding-bottom: 10px;
+  font-size: 2em;
+  color: #B29700;
+}
+
+body main #mainContainer #searchFormContainer form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body main #mainContainer #searchFormContainer form p {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  font-size: 1.4em;
+}
+
+body main #mainContainer #searchFormContainer form select, body main #mainContainer #searchFormContainer form input {
+  color: #B29700;
+  padding: 2px 5px;
+  border: 1px solid;
+  border-radius: 24px;
+  background-color: #111111;
+  font-size: .9em;
+  text-align: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Titillium Web', sans-serif;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B29700;
+  border: 5px solid #111111;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a19e9e;
 }
 /*# sourceMappingURL=style.css.map */

@@ -7,6 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,700;1,400;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="src/style.css">
 </head>
 
@@ -14,18 +18,30 @@
     <header>
         <h1>Kursy walut online</h1>
         <nav>
-            <a href="#" id="search"><i class="fas fa-search-dollar"></i></a>
-            <a href="#" id="calculator"><i class="fas fa-calculator"></i></a>
-            <a href="#" id="info"><i class="fas fa-info-circle"></i></a>
+            <a href="#" id="search" title="Wyszukaj waluty"><i class="fas fa-search-dollar"></i></a>
+            <a href="#" id="calculator" title="Kalkulator"><i class="fas fa-calculator"></i></a>
+            <a href="#" id="curiosities" title="Ciekawostki"><i class="far fa-lightbulb"></i></a>
+            <a href="#" id="info" title="Informacje"><i class="fas fa-info-circle"></i></a>
         </nav>
     </header>
     <main>
-        <section id="mainContainer"></section>
+        <section id="mainContainer">
+            <div id="searchFormContainer">
+                <h2>Wyszukaj waluty</h2>
+                <form action="">
+                    <p>Waluta</p>
+                    <select id="searchCurrencyCode">
+                        <option value="CHF">CHF (frank szwajcarski)</option>
+                        <option value="CHF">CZK</option>
+                    </select>
+                    <p>Ilość ostatnich notowań</p>
+                    <input type="number" id="searchRatesNumber">
+                    <button>Szukaj</button>
+                </form>
+            </div>
+        </section>
     </main>
-    <!-- <script
-        src="https://polyfill.io/v3/polyfill.min.js?features=Array.from,Promise,Symbol,Object.setPrototypeOf,Object.getOwnPropertySymbols,Set">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/superagent"></script> -->
+    <canvas id="background"></canvas>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="src/index.js" type="module"></script>
 </body>
