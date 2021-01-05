@@ -35,8 +35,12 @@
                         <option value="CHF">CZK</option>
                     </select>
                     <p>Ilość ostatnich notowań</p>
-                    <input type="number" id="searchRatesNumber">
-                    <button>Szukaj</button>
+                    <div id="searchRatesQuantity">
+                        <button class="inputNumber down"><p>-</p></button>
+                        <input type="number" value="15">
+                        <button class="inputNumber up"><p>+</p></button>
+                    </div>
+                    <button id="btnSearchRates">Szukaj</button>
                 </form>
             </div>
         </section>

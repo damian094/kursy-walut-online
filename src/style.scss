@@ -27,3 +27,8 @@
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(161, 158, 158);
 }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}

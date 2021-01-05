@@ -32,7 +32,7 @@ export default class RenderCurrencyContainer {
         }
 
         const createOhterInfo = function (code, days) {
-            let lastRates = []
+            let lastRates = [];
             new Promise(resolve => {
                     this.data.getLastRates(code, days)
                         .then(res => {
