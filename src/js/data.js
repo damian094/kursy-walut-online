@@ -1,13 +1,13 @@
 export default class Data {
     constructor() {
-        this.currentRates = [];
+        this.currenciesDatas = [];
         this.uploadingDate;
 
-        this.getCurrentRates = () => {
+        this.getCurrenciesDatas = () => {
             return new Promise((resolve, reject) => {
                 axios.get(`https://api.nbp.pl/api/exchangerates/tables/a`)
                     .then(res => {
-                        this.currentRates = res.data[0].rates;
+                        this.currenciesDatas = res.data[0].rates;
                         this.uploadingDate = res.data[0].effectiveDate;
                         resolve();
                     })
@@ -21,7 +21,7 @@ export default class Data {
                     .then(res => {
                         resolve(res.data.rates);
                     })
-                    .catch(err => reject(err))
+                    .catch(err => reject(err));
             })
         }
     }

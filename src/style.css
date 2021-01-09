@@ -74,7 +74,12 @@ body header {
   color: #B29700;
 }
 
-body header h1 {
+body header a {
+  text-decoration: none;
+  color: #B29700;
+}
+
+body header a h1 {
   padding: 5px 0 0 30px;
   font-size: 2.7em;
   letter-spacing: -1px;
@@ -94,17 +99,21 @@ body header nav {
           align-items: center;
 }
 
-body header nav a {
+body header nav a,
+body header nav button {
   display: block;
   padding: 0 15px;
   margin-right: 30px;
   font-size: 1.9em;
   color: #bbb;
+  background-color: transparent;
+  border: 0;
   -webkit-transition: .1s;
   transition: .1s;
 }
 
-body header nav a:hover {
+body header nav a:hover,
+body header nav button:hover {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
   color: #B29700;
@@ -116,6 +125,9 @@ body main #mainContainer {
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   height: 100%;
@@ -137,10 +149,12 @@ body main #mainContainer .currencyContainer {
   padding: 13px;
   -ms-flex-preferred-size: 33.333%;
       flex-basis: 33.333%;
-  min-width: 350px;
+  min-width: 400px;
   padding: 40px 0;
   text-align: center;
   color: #ddd;
+  -webkit-transform: translateX(100vw);
+          transform: translateX(100vw);
   -webkit-animation: .4s showContainer linear both;
           animation: .4s showContainer linear both;
 }
@@ -149,7 +163,7 @@ body main #mainContainer .currencyContainer .mainInfo {
   padding-bottom: 20px;
 }
 
-body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) {
+body main #mainContainer .currencyContainer .mainInfo div.name {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -162,10 +176,10 @@ body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) {
   font-size: 1.5em;
 }
 
-body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) .icon {
+body main #mainContainer .currencyContainer .mainInfo div.name .icon {
   display: block;
   width: 40px;
-  height: 40px;
+  height: 35px;
   margin-right: 10px;
   border: 1px solid black;
   border-radius: 50%;
@@ -176,21 +190,25 @@ body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) .icon {
   background-color: black;
 }
 
-body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(1) .currency {
+body main #mainContainer .currencyContainer .mainInfo div.name .currency {
   padding-left: 7px;
   font-size: .65em;
 }
 
-body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(2) {
+body main #mainContainer .currencyContainer .mainInfo div.currentExchange p {
   font-size: 1.3em;
 }
 
-body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(2) .exchange {
+body main #mainContainer .currencyContainer .mainInfo div.currentExchange p .exchange {
   font-weight: bold;
   font-size: 1em;
 }
 
-body main #mainContainer .currencyContainer .mainInfo p:nth-of-type(3) {
+body main #mainContainer .currencyContainer .mainInfo div.currentExchange p .trend {
+  padding-left: 6px;
+}
+
+body main #mainContainer .currencyContainer .mainInfo div.updateDate {
   color: #B29700;
   font-size: .8em;
 }
@@ -255,10 +273,6 @@ body main #mainContainer .currencyContainer .otherInfo button {
   cursor: pointer;
 }
 
-body main #mainContainer .currencyContainer .otherInfo button:focus {
-  outline: none;
-}
-
 body main #mainContainer .currencyContainer .otherInfo button.switch {
   display: block;
   position: absolute;
@@ -289,8 +303,8 @@ body main #mainContainer .currencyContainer .otherInfo button.switch.rotate i {
 }
 
 body main #mainContainer .currencyContainer .otherInfo button.chart {
-  margin-top: 30px;
-  padding: 5px 20px 20px;
+  margin: 30px 0;
+  padding: 5px 20px;
   background-color: transparent;
   font-size: 1.1em;
   font-weight: bold;
@@ -310,10 +324,6 @@ body main #mainContainer #searchFormContainer {
       -ms-flex-pack: center;
           justify-content: center;
   color: #ddd;
-}
-
-body main #mainContainer #searchFormContainer * {
-  outline: none;
 }
 
 body main #mainContainer #searchFormContainer h2 {
@@ -336,19 +346,28 @@ body main #mainContainer #searchFormContainer form {
 }
 
 body main #mainContainer #searchFormContainer form > p {
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 5px;
   font-size: 1.4em;
 }
 
-body main #mainContainer #searchFormContainer form select, body main #mainContainer #searchFormContainer form input, body main #mainContainer #searchFormContainer form button#btnSearchRates {
+body main #mainContainer #searchFormContainer form select,
+body main #mainContainer #searchFormContainer form input,
+body main #mainContainer #searchFormContainer form button#btnSearchCurrency {
   color: #B29700;
-  padding: 2px 5px;
-  border: 1px solid;
+  padding: 0 8px;
+  border: 1px solid #B29700;
   border-radius: 24px;
   background-color: #111111;
-  font-size: .9em;
+  font-size: 1em;
   text-align: center;
+}
+
+body main #mainContainer #searchFormContainer form select {
+  text-align-last: center;
+  cursor: pointer;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 body main #mainContainer #searchFormContainer form div#searchRatesQuantity {
@@ -361,7 +380,7 @@ body main #mainContainer #searchFormContainer form div#searchRatesQuantity {
 }
 
 body main #mainContainer #searchFormContainer form div#searchRatesQuantity input {
-  width: 60px;
+  width: 40px;
   border-radius: 0;
   border-left: 0;
   border-right: 0;
@@ -371,55 +390,38 @@ body main #mainContainer #searchFormContainer form div#searchRatesQuantity butto
   height: 100%;
   width: 35px;
   background-color: #111111;
-  border: 1px solid;
+  border: 1px solid #B29700;
   color: #B29700;
-  position: relative;
+  font-size: 1em;
 }
 
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button p {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: 1.7em;
-  -webkit-transition: .2s;
-  transition: .2s;
-}
-
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button p:hover {
+body main #mainContainer #searchFormContainer form div#searchRatesQuantity button:hover {
   color: #bbb;
 }
 
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button:nth-of-type(1) {
+body main #mainContainer #searchFormContainer form div#searchRatesQuantity button.down {
   border-bottom-left-radius: 24px;
   border-top-left-radius: 24px;
 }
 
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button:nth-of-type(2) {
+body main #mainContainer #searchFormContainer form div#searchRatesQuantity button.up {
   border-bottom-right-radius: 24px;
   border-top-right-radius: 24px;
 }
 
-body main #mainContainer #searchFormContainer form button#btnSearchRates {
-  margin-top: 40px;
+body main #mainContainer #searchFormContainer form button#btnSearchCurrency {
+  margin-top: 60px;
   padding: 0 40px;
   font-size: 1.4em;
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: .15s;
+  transition: .15s;
 }
 
-body main #mainContainer #searchFormContainer form button#btnSearchRates:hover {
+body main #mainContainer #searchFormContainer form button#btnSearchCurrency:hover {
   color: #bbb;
+  border-color: #bbb;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 * {
@@ -428,6 +430,7 @@ body main #mainContainer #searchFormContainer form button#btnSearchRates:hover {
   font-family: 'Titillium Web', sans-serif;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  outline: none;
 }
 
 ::-webkit-scrollbar {
@@ -450,5 +453,9 @@ body main #mainContainer #searchFormContainer form button#btnSearchRates:hover {
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
+}
+
+button {
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

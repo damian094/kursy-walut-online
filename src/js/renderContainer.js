@@ -1,7 +1,7 @@
 export default class RenderCurrencyContainer {
     constructor() {
         const getCurrencyData = function (currencyCode) {
-            return this.data.currentRates.find(data => data.code === currencyCode.toUpperCase())
+            return this.data.currenciesDatas.find(data => data.code === currencyCode.toUpperCase())
         }
 
         const createContainer = code => {
@@ -17,9 +17,9 @@ export default class RenderCurrencyContainer {
         const createMainInfo = function (code, currency, mid) {
             const mainInfoDiv = document.querySelector(`div.mainInfo.${code}`);
             mainInfoDiv.innerHTML = `
-            <p><span class="icon" style="background-image: url(images/${code}.png);"></span>${code}<span class="currency">(${currency})<span></ p>
-            <p>Kurs: <span class="exchange">${mid.toFixed(4)}</span></p>
-            <p class="updateDate">Dane z ${this.data.uploadingDate}</p>`
+            <div class="name"><span class="icon" style="background-image: url(images/${code}.png);"></span>${code}<span class="currency">(${currency})<span></div>
+            <div class="currentExchange"><p>Kurs: <span class="exchange">${mid.toFixed(4)}</span><span class="trend"><i class="fas fa-caret-up"></i></span></p></div>
+            <div class="updateDate"><p>Dane z ${this.data.uploadingDate}</p></div>`
         }
 
 
@@ -52,7 +52,7 @@ export default class RenderCurrencyContainer {
                         const newP = document.createElement('p');
                         otherInfoDiv.appendChild(newP).innerHTML = `<span class="lastRate" style="color: ${setBacklightColor(lastRates, i)};">${mid.toFixed(4)}</span> <span class="lastDate">(${effectiveDate})</span>`;
                     }
-                    
+
                     const chartBtn = document.createElement('button');
                     chartBtn.innerHTML = 'Pokaż wykres <i class="fas fa-chart-line"></i>';
                     otherInfoDiv.appendChild(chartBtn).classList.add('chart');
@@ -60,33 +60,43 @@ export default class RenderCurrencyContainer {
                         otherInfoDiv.classList.add('enableBlur');
                     })
                     chartBtn.addEventListener('mouseleave', () => {
-                        otherInfoDiv.classList.remove('enableBlur')
+                        otherInfoDiv.classList.remove('enableBlur');
                     })
 
+
                     const switchBtn = document.createElement('button');
-                    switchBtn.innerHTML = '<i class="fas fa-arrow-circle-up"></i>';
+                    if (window.matchMedia('(max-width: 1024px)').matches) {
+                        switchBtn.innerHTML = '<i class="fas fa-arrow-circle-up"></i>';
+
+                        switchBtn.addEventListener('click', function () {
+                            otherInfoDiv.classList.toggle('hidden');
+                            this.classList.toggle('rotate');
+                        })
+                    } else {
+                        switchBtn.style.cursor = 'default';
+                    }
                     otherInfoDiv.appendChild(switchBtn).classList.add('switch');
-                    switchBtn.addEventListener('click', function () {
-                        otherInfoDiv.classList.toggle('hidden');
-                        this.classList.toggle('rotate');
-                    })
                 })
         }
 
         this.render = function (currencyCode, days) {
-            const currencyData = getCurrencyData.bind(this, currencyCode)();
-            if (currencyData) {
-                const {
-                    currency,
-                    code,
-                    mid
-                } = currencyData
-                createContainer(code);
-                createMainInfo.bind(this, code, currency, mid)();
-                createOhterInfo.bind(this, code, days)();
-            } else {
-                alert(`Currency "${currencyCode}" not exist in database`);
-            }
+            return new Promise(resolve => {
+                const currencyData = getCurrencyData.bind(this, currencyCode)();
+                if (currencyData) {
+                    const {
+                        currency,
+                        code,
+                        mid
+                    } = currencyData;
+                    createContainer(code);
+                    createMainInfo.bind(this, code, currency, mid)();
+                    createOhterInfo.bind(this, code, days)();
+                } else {
+                    alert(`Waluta "${currencyCode}" nie jest obecnie dostępna`);
+                    location.reload();
+                }
+                resolve();
+            })
         }
     }
 }
