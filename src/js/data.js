@@ -16,6 +16,7 @@ export default class Data {
         }
 
         this.getLastRates = (currencyCode, days) => {
+            days++;
             return new Promise((resolve, reject) => {
                 axios.get(`https://api.nbp.pl/api/exchangerates/rates/A/${currencyCode}/last/${days}`)
                     .then(res => {

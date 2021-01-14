@@ -6,18 +6,18 @@ import Background from './js/background.js';
 
 class App {
     constructor() {
+        this.dom = new DOM();
+        this.currencyContainer = new RenderCurrencyContainer();
+        this.background = new Background();
         this.data = new Data();
         this.data.getCurrenciesDatas()
             .then(() => {
-                this.currencyContainer.render.bind(this, 'eur', 20)();
-                this.currencyContainer.render.bind(this, 'gbp', 20)();
-                this.currencyContainer.render.bind(this, 'usd', 20)();
+                this.currencyContainer.render.bind(this, 'EUR', 15)();
+                this.currencyContainer.render.bind(this, 'GBP', 15)();
+                this.currencyContainer.render.bind(this, 'USD', 15)();
+                this.dom.render.bind(this)();
             })
-            .catch(reject => console.log(reject));
-        this.dom = new DOM();
-        this.dom.render.bind(this)();
-        this.currencyContainer = new RenderCurrencyContainer();
-        this.background = new Background();
+            .catch(err => console.log(err));
     }
 }
 

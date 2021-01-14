@@ -8,41 +8,47 @@ export default class Background {
         const drawingTime = 35;
         const pauseTime = 9000;
 
-        this.draw = (min, max, startY, color) => {
+        const draw = (min, max, startY, color) => {
             let way = window.innerWidth / steps;
             let currentX = 0;
             let currentY = window.innerHeight - startY;
             let currentStep = 0;
 
-            const drawLine = () => {
-                ctx.beginPath();
-                ctx.moveTo(currentX, currentY);
-                currentX += way;
-                currentY = window.innerHeight - random(window.innerHeight * min, window.innerHeight * max)
-                ctx.lineTo(currentX, currentY);
-                ++currentStep == steps ? resetAnimation() : undefined;
-                ctx.lineWidth = 4;
-                ctx.strokeStyle = color;
-                ctx.lineCap = "round";
-                ctx.stroke();
+            const drawingFunctions = {
+                drawLine() {
+                    ctx.beginPath();
+                    ctx.moveTo(currentX, currentY);
+                    currentX += way;
+                    currentY = window.innerHeight - random(window.innerHeight * min, window.innerHeight * max)
+                    ctx.lineTo(currentX, currentY);
+                    ++currentStep == steps ? resetAnimation() : undefined;
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = color;
+                    ctx.lineCap = "round";
+                    ctx.stroke();
+                },
+                clearCanvas() {
+                    way = window.innerWidth / steps;
+                    currentX = 0;
+                    currentY = window.innerHeight - startY;
+                    currentStep = 0;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                },
+                resetAnimation() {
+                    clearInterval(drawChart)
+                    pauseAnimation = setInterval(() => {
+                        clearCanvas();
+                        clearInterval(pauseAnimation);
+                        drawChart = setInterval(drawLine, drawingTime);
+                    }, pauseTime);
+                }
             }
 
-            const clearCanvas = () => {
-                way = window.innerWidth / steps;
-                currentX = 0;
-                currentY = window.innerHeight - startY;
-                currentStep = 0;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-
-            const resetAnimation = () => {
-                clearInterval(drawChart)
-                pauseAnimation = setInterval(() => {
-                    clearCanvas();
-                    clearInterval(pauseAnimation);
-                    drawChart = setInterval(drawLine, drawingTime);
-                }, pauseTime);
-            }
+            const {
+                drawLine,
+                clearCanvas,
+                resetAnimation
+            } = drawingFunctions;
 
             let drawChart = setInterval(drawLine, drawingTime);
             let pauseAnimation;
@@ -55,18 +61,18 @@ export default class Background {
             })
         }
 
-        this.setSize = () => {
+        const setSize = () => {
             canvas.height = window.innerHeight;
             canvas.width = window.innerWidth;
         }
 
         const render = () => {
-            this.setSize();
-            this.draw(.02, .15, 100, '#43a047');
-            this.draw(0, .05, 40, '#ff2400');
+            setSize();
+            draw(.02, .15, 100, '#43a047');
+            draw(0, .05, 40, '#ff2400');
         }
 
         render();
-        window.addEventListener('resize', this.setSize);
+        window.addEventListener('resize', setSize);
     }
 }

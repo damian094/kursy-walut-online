@@ -56,7 +56,6 @@ body {
 }
 
 body canvas#background {
-  display: block;
   position: fixed;
   left: 0;
   top: 0;
@@ -64,7 +63,10 @@ body canvas#background {
   z-index: -1;
   -webkit-filter: blur(5px);
           filter: blur(5px);
-  background-color: #252525;
+  background-color: #212121;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3Cellipse fill='none' stroke-width='1' stroke-opacity='0.17' id='a' rx='600' ry='450'/%3E%3C/defs%3E%3Cg style='transform-origin:center'%3E%3Cg transform='rotate(180 0 0)' style='transform-origin:center'%3E%3Cg transform='rotate(-160 0 0)' style='transform-origin:center'%3E%3Cg transform='translate(1000 750)'%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-60 0 0) scale(0.4)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-50 0 0) scale(0.5)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-40 0 0) scale(0.6)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-30 0 0) scale(0.7)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-20 0 0) scale(0.8)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-10 0 0) scale(0.9)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform=''/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(10 0 0) scale(1.1)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(20 0 0) scale(1.2)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(30 0 0) scale(1.3)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(40 0 0) scale(1.4)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(50 0 0) scale(1.5)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(60 0 0) scale(1.6)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(70 0 0) scale(1.7)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(80 0 0) scale(1.8)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(90 0 0) scale(1.9)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(100 0 0) scale(2)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(110 0 0) scale(2.1)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(120 0 0) scale(2.2)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(130 0 0) scale(2.3)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(140 0 0) scale(2.4)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(150 0 0) scale(2.5)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(160 0 0) scale(2.6)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 body header {
@@ -77,6 +79,7 @@ body header {
 body header a {
   text-decoration: none;
   color: #B29700;
+  cursor: default;
 }
 
 body header a h1 {
@@ -99,7 +102,6 @@ body header nav {
           align-items: center;
 }
 
-body header nav a,
 body header nav button {
   display: block;
   padding: 0 15px;
@@ -112,10 +114,9 @@ body header nav button {
   transition: .1s;
 }
 
-body header nav a:hover,
 body header nav button:hover {
-  -webkit-transform: scale(1.15);
-          transform: scale(1.15);
+  -webkit-transform: scale(1.15) rotate(5deg);
+          transform: scale(1.15) rotate(5deg);
   color: #B29700;
 }
 
@@ -155,15 +156,13 @@ body main #mainContainer .currencyContainer {
   color: #ddd;
   -webkit-transform: translateX(100vw);
           transform: translateX(100vw);
-  -webkit-animation: .4s showContainer linear both;
-          animation: .4s showContainer linear both;
 }
 
 body main #mainContainer .currencyContainer .mainInfo {
   padding-bottom: 20px;
 }
 
-body main #mainContainer .currencyContainer .mainInfo div.name {
+body main #mainContainer .currencyContainer .mainInfo .name {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -176,7 +175,7 @@ body main #mainContainer .currencyContainer .mainInfo div.name {
   font-size: 1.5em;
 }
 
-body main #mainContainer .currencyContainer .mainInfo div.name .icon {
+body main #mainContainer .currencyContainer .mainInfo .name .icon {
   display: block;
   width: 40px;
   height: 35px;
@@ -190,7 +189,7 @@ body main #mainContainer .currencyContainer .mainInfo div.name .icon {
   background-color: black;
 }
 
-body main #mainContainer .currencyContainer .mainInfo div.name .currency {
+body main #mainContainer .currencyContainer .mainInfo .name .currency {
   padding-left: 7px;
   font-size: .65em;
 }
@@ -225,6 +224,8 @@ body main #mainContainer .currencyContainer .otherInfo {
           box-shadow: 3px 4px 12px 12px rgba(0, 0, 0, 0.72);
   background-color: rgba(20, 20, 20, 0.5);
   overflow: hidden;
+  border-left: 1px solid #B29700;
+  border-right: 1px solid #B29700;
   -webkit-transition: .6s;
   transition: .6s;
 }
@@ -268,6 +269,7 @@ body main #mainContainer .currencyContainer .otherInfo p .lastDate {
 
 body main #mainContainer .currencyContainer .otherInfo button {
   background-color: #111111;
+  background-color: rgba(10, 10, 10, 0.7);
   border: 0;
   color: #B29700;
   cursor: pointer;
@@ -281,6 +283,7 @@ body main #mainContainer .currencyContainer .otherInfo button.switch {
   height: 30px;
   width: 100%;
   border-top: 2px solid;
+  border-radius: 25px;
   font-size: 1em;
   -webkit-transition: .3s;
   transition: .3s;
@@ -310,9 +313,125 @@ body main #mainContainer .currencyContainer .otherInfo button.chart {
   font-weight: bold;
 }
 
-body main #mainContainer #searchFormContainer {
+body main #mainContainer .mainContainer__containers {
   display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   height: 500px;
+  padding-top: 50px;
+  color: #ddd;
+}
+
+body main #mainContainer .mainContainer__containers h2 {
+  padding-bottom: 5px;
+  font-size: 2em;
+  color: #B29700;
+}
+
+body main #mainContainer .mainContainer__containers form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body main #mainContainer .mainContainer__containers form p {
+  padding-top: 20px;
+  padding-bottom: 5px;
+  font-size: 1.2em;
+}
+
+body main #mainContainer .mainContainer__containers form select,
+body main #mainContainer .mainContainer__containers form input,
+body main #mainContainer .mainContainer__containers form button.start {
+  color: #B29700;
+  padding: 0 8px;
+  border: 1px solid #B29700;
+  border-radius: 24px;
+  background-color: #111111;
+  font-size: 1em;
+  text-align: center;
+}
+
+body main #mainContainer .mainContainer__containers form select {
+  text-align-last: center;
+  cursor: pointer;
+}
+
+body main #mainContainer .mainContainer__containers form button.start {
+  margin-top: 60px;
+  padding: 0 40px;
+  font-size: 1.4em;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+body main #mainContainer .mainContainer__containers form button.start:hover {
+  color: #bbb;
+  border-color: #bbb;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+body main #mainContainer .mainContainer__containers#searchContainer #search__form--ratesQuantity {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body main #mainContainer .mainContainer__containers#searchContainer #search__form--ratesQuantity input {
+  width: 40px;
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+body main #mainContainer .mainContainer__containers#searchContainer #search__form--ratesQuantity button {
+  height: 100%;
+  width: 35px;
+  background-color: #111111;
+  border: 1px solid #B29700;
+  color: #B29700;
+  font-size: 1em;
+}
+
+body main #mainContainer .mainContainer__containers#searchContainer #search__form--ratesQuantity button:hover {
+  color: #bbb;
+}
+
+body main #mainContainer .mainContainer__containers#searchContainer #search__form--ratesQuantity button.down {
+  border-bottom-left-radius: 24px;
+  border-top-left-radius: 24px;
+}
+
+body main #mainContainer .mainContainer__containers#searchContainer #search__form--ratesQuantity button.up {
+  border-bottom-right-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+body main #mainContainer .mainContainer__containers#calculatorContainer form #calculator__form--options {
+  text-align: center;
+}
+
+body main #mainContainer .mainContainer__containers#calculatorContainer form #calculator__form--result {
+  display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -323,105 +442,16 @@ body main #mainContainer #searchFormContainer {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  color: #ddd;
 }
 
-body main #mainContainer #searchFormContainer h2 {
-  padding-bottom: 10px;
-  font-size: 2em;
-  color: #B29700;
+body main #mainContainer .mainContainer__containers#calculatorContainer form #calculator__form--result .calculator__form--result-container {
+  position: relative;
 }
 
-body main #mainContainer #searchFormContainer form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-body main #mainContainer #searchFormContainer form > p {
-  padding-top: 20px;
-  padding-bottom: 5px;
-  font-size: 1.4em;
-}
-
-body main #mainContainer #searchFormContainer form select,
-body main #mainContainer #searchFormContainer form input,
-body main #mainContainer #searchFormContainer form button#btnSearchCurrency {
-  color: #B29700;
-  padding: 0 8px;
-  border: 1px solid #B29700;
-  border-radius: 24px;
-  background-color: #111111;
-  font-size: 1em;
-  text-align: center;
-}
-
-body main #mainContainer #searchFormContainer form select {
-  text-align-last: center;
-  cursor: pointer;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity input {
-  width: 40px;
-  border-radius: 0;
-  border-left: 0;
-  border-right: 0;
-}
-
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button {
+body main #mainContainer .mainContainer__containers#calculatorContainer form #calculator__form--result .calculator__form--result-container span {
+  position: absolute;
+  left: calc(100% + 3px);
   height: 100%;
-  width: 35px;
-  background-color: #111111;
-  border: 1px solid #B29700;
-  color: #B29700;
-  font-size: 1em;
-}
-
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button:hover {
-  color: #bbb;
-}
-
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button.down {
-  border-bottom-left-radius: 24px;
-  border-top-left-radius: 24px;
-}
-
-body main #mainContainer #searchFormContainer form div#searchRatesQuantity button.up {
-  border-bottom-right-radius: 24px;
-  border-top-right-radius: 24px;
-}
-
-body main #mainContainer #searchFormContainer form button#btnSearchCurrency {
-  margin-top: 60px;
-  padding: 0 40px;
-  font-size: 1.4em;
-  -webkit-transition: .15s;
-  transition: .15s;
-}
-
-body main #mainContainer #searchFormContainer form button#btnSearchCurrency:hover {
-  color: #bbb;
-  border-color: #bbb;
-  -webkit-transform: scale(1.05);
-          transform: scale(1.05);
 }
 
 * {

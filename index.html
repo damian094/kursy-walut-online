@@ -16,35 +16,65 @@
 
 <body>
     <header>
-        <a href="index.html" style="cursor: default;">
+        <a href="index.html">
             <h1>Kursy walut online</h1>
         </a>
         <nav>
-            <button id="search" title="Wyszukaj waluty"><i class="fas fa-search-dollar"></i></button>
-            <button id="calculator" title="Kalkulator"><i class="fas fa-calculator"></i></button>
-            <button id="curiosities" title="Ciekawostki"><i class="far fa-lightbulb"></i></button>
-            <button id="info" title="Informacje"><i class="fas fa-info-circle"></i></button>
+            <button id="nav_search" title="Wyszukaj waluty"><i class="fas fa-search-dollar"></i></button>
+            <button id="nav_calculator" title="Kalkulator"><i class="fas fa-calculator"></i></button>
+            <button id="nav_curiosities" title="Ciekawostki"><i class="far fa-lightbulb"></i></button>
+            <button id="nav_info" title="Informacje"><i class="fas fa-info-circle"></i></button>
         </nav>
     </header>
     <main>
-        <section id="mainContainer">
-            <div id="searchFormContainer">
+        <div id="mainContainer">
+            <section id="searchContainer" class="mainContainer__containers">
                 <h2>Wyszukaj waluty</h2>
                 <form action="">
                     <p>Waluta</p>
-                    <select id="searchCurrencyCode">
+                    <select id="search__form--currencyCode">
                         <option value="default">Wybierz walutę z listy</option>
                     </select>
                     <p>Ilość ostatnich notowań</p>
-                    <div id="searchRatesQuantity">
-                        <button class="inputNumber down">-</button>
-                        <input type="number" value="20">
-                        <button class="inputNumber up">+</button>
+                    <div id="search__form--ratesQuantity">
+                        <button class="search__form--changeQuantity down">-</button>
+                        <input type="number" value="15">
+                        <button class="search__form--changeQuantity up">+</button>
                     </div>
-                    <button id="btnSearchCurrency">Szukaj</button>
+                    <button id="search__form--button" class="start">Szukaj</button>
                 </form>
-            </div>
-        </section>
+            </section>
+            <section id="calculatorContainer" class="mainContainer__containers">
+                <h2>Kalkulator</h2>
+                <form action="">
+                    <div id="calculator__form--options">
+                        <p>Twoja waluta</p>
+                        <select id="calculator__form--from" class="calculator__form--select">
+                            <option value="default">Wybierz walutę z listy</option>
+                            <option value="PLN">PLN - polski złoty</option>
+                        </select>
+                        <p>Przelicz na</p>
+                        <select id="calculator__form--to" class="calculator__form--select">
+                            <option value="default">Wybierz walutę z listy</option>
+                            <option value="PLN">PLN - polski złoty</option>
+                        </select>
+                    </div>
+                    <div id="calculator__form--result">
+                        <div class="calculator__form--result-container">
+                            <input type="number" id="" placeholder="Ilość">
+                            <span>PLN</span>
+                        </div>
+                        <span>=</span>
+                        <div class="calculator__form--result-container">
+                            <input type="text" disabled>
+                            <span>PLN</span>
+                        </div>
+                    </div>
+                    <button id="calculator__form--button" class="start">Dalej</button>
+                </form>
+            </section>
+            <section id="curiositesContainer" class="mainContainer__containers"></section>
+        </div>
     </main>
     <canvas id="background"></canvas>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

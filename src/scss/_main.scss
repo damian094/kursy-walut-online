@@ -8,15 +8,16 @@ body {
     overflow-x: hidden;
 
     canvas#background {
-        display: block;
         position: fixed;
         left: 0;
         top: 0;
         overflow: hidden;
         z-index: -1;
         filter: blur(5px);
-        background-color: rgb(37, 37, 37);
-
+        background-color: #212121;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3Cellipse fill='none' stroke-width='1' stroke-opacity='0.17' id='a' rx='600' ry='450'/%3E%3C/defs%3E%3Cg style='transform-origin:center'%3E%3Cg transform='rotate(180 0 0)' style='transform-origin:center'%3E%3Cg transform='rotate(-160 0 0)' style='transform-origin:center'%3E%3Cg transform='translate(1000 750)'%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-60 0 0) scale(0.4)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-50 0 0) scale(0.5)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-40 0 0) scale(0.6)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-30 0 0) scale(0.7)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-20 0 0) scale(0.8)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(-10 0 0) scale(0.9)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform=''/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(10 0 0) scale(1.1)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(20 0 0) scale(1.2)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(30 0 0) scale(1.3)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(40 0 0) scale(1.4)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(50 0 0) scale(1.5)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(60 0 0) scale(1.6)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(70 0 0) scale(1.7)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(80 0 0) scale(1.8)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(90 0 0) scale(1.9)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(100 0 0) scale(2)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(110 0 0) scale(2.1)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(120 0 0) scale(2.2)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(130 0 0) scale(2.3)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(140 0 0) scale(2.4)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(150 0 0) scale(2.5)'/%3E%3Cuse stroke='%23b29700' href='%23a' transform='rotate(160 0 0) scale(2.6)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
     }
 
     header {
@@ -28,6 +29,7 @@ body {
         a {
             text-decoration: none;
             color: $additional-font-color;
+            cursor: default;
 
             h1 {
                 padding: 5px 0 0 30px;
@@ -45,7 +47,6 @@ body {
             display: flex;
             align-items: center;
 
-            a,
             button {
                 display: block;
                 padding: 0 15px;
@@ -57,7 +58,7 @@ body {
                 transition: .1s;
 
                 &:hover {
-                    transform: scale(1.15);
+                    transform: scale(1.15) rotate(5deg);
                     color: $additional-font-color;
                 }
             }
@@ -86,12 +87,11 @@ body {
                 text-align: center;
                 color: #ddd;
                 transform: translateX(100vw);
-                animation: .4s showContainer linear both;
 
                 .mainInfo {
                     padding-bottom: 20px;
 
-                    div.name {
+                    .name {
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -147,6 +147,8 @@ body {
                     box-shadow: 3px 4px 12px 12px rgba(0, 0, 0, 0.72);
                     background-color: $otherInfo-background;
                     overflow: hidden;
+                    border-left: 1px solid $additional-font-color;
+                    border-right: 1px solid $additional-font-color;
                     transition: .6s;
 
                     &.enableBlur>* {
@@ -184,6 +186,7 @@ body {
 
                     button {
                         background-color: $header-color;
+                        background-color: rgba(10, 10, 10, 0.7);
                         border: 0;
                         color: $additional-font-color;
                         cursor: pointer;
@@ -196,6 +199,7 @@ body {
                             height: 30px;
                             width: 100%;
                             border-top: 2px solid;
+                            border-radius: 25px;
                             font-size: 1em;
                             transition: .3s;
 
@@ -224,16 +228,17 @@ body {
                 }
             }
 
-            #searchFormContainer {
+            .mainContainer__containers {
                 display: none;
-                height: 500px;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
+                height: 500px;
+                padding-top: 50px;
                 color: #ddd;
 
                 h2 {
-                    padding-bottom: 10px;
+                    padding-bottom: 5px;
                     font-size: 2em;
                     color: $additional-font-color;
                 }
@@ -243,15 +248,15 @@ body {
                     flex-direction: column;
                     align-items: center;
 
-                    &>p {
+                    p {
                         padding-top: 20px;
                         padding-bottom: 5px;
-                        font-size: 1.4em;
+                        font-size: 1.2em;
                     }
 
                     select,
                     input,
-                    button#btnSearchCurrency {
+                    button.start {
                         color: $additional-font-color;
                         padding: 0 8px;
                         border: 1px solid $additional-font-color;
@@ -264,11 +269,25 @@ body {
                     select {
                         text-align-last: center;
                         cursor: pointer;
-                        overflow: hidden;
-                        overflow-y: scroll;
                     }
 
-                    div#searchRatesQuantity {
+                    button.start {
+                        margin-top: 60px;
+                        padding: 0 40px;
+                        font-size: 1.4em;
+                        transition: .15s;
+
+                        &:hover {
+                            color: $light-font-color;
+                            border-color: $light-font-color;
+                            transform: scale(1.05);
+                        }
+                    }
+                }
+
+                &#searchContainer {
+
+                    #search__form--ratesQuantity {
                         display: flex;
                         align-items: center;
 
@@ -302,17 +321,29 @@ body {
                             }
                         }
                     }
+                }
 
-                    button#btnSearchCurrency {
-                        margin-top: 60px;
-                        padding: 0 40px;
-                        font-size: 1.4em;
-                        transition: .15s;
+                &#calculatorContainer {
+                    form {
+                        #calculator__form--options {
+                            text-align: center;
+                        }
 
-                        &:hover {
-                            color: $light-font-color;
-                            border-color: $light-font-color;
-                            transform: scale(1.05);
+                        #calculator__form--result {
+                            display: none;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+
+                            .calculator__form--result-container {
+                                position: relative;
+
+                                span {
+                                    position: absolute;
+                                    left: calc(100% + 3px);
+                                    height: 100%;
+                                }
+                            }
                         }
                     }
                 }
