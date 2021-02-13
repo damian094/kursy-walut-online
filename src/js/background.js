@@ -4,7 +4,7 @@ export default class Background {
         const ctx = canvas.getContext("2d");
 
         const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-        const steps = window.matchMedia('(min-width:1025px)').matches ? 30 : 15;
+        const steps = window.matchMedia('(max-width: 768px)').matches ? 15 : 30;
         const drawingTime = 35;
         const pauseTime = 9000;
 

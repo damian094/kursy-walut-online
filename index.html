@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kursy walut online</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -15,69 +15,95 @@
 </head>
 
 <body>
-    <header>
-        <a href="index.html">
-            <h1>Kursy walut online</h1>
-        </a>
-        <nav>
-            <button id="nav_search" title="Wyszukaj waluty"><i class="fas fa-search-dollar"></i></button>
-            <button id="nav_calculator" title="Kalkulator"><i class="fas fa-calculator"></i></button>
-            <button id="nav_curiosities" title="Ciekawostki"><i class="far fa-lightbulb"></i></button>
-            <button id="nav_info" title="Informacje"><i class="fas fa-info-circle"></i></button>
-        </nav>
-    </header>
-    <main>
-        <div id="mainContainer">
-            <section id="searchContainer" class="mainContainer__containers">
+    <div class="wrapper">
+        <header>
+            <a href="index.html" title="Strona główna">
+                <h1>Kursy walut online</h1>
+            </a>
+            <nav>
+                <button id="nav_search" class="app-btn app-btn--nav" title="Wyszukaj waluty"><i
+                        class="fas fa-search-dollar"></i></button>
+                <button id="nav_calculator" class="app-btn app-btn--nav" title="Kalkulator"><i
+                        class="fas fa-calculator"></i></button>
+                <button id="nav_curiosites" class="app-btn app-btn--nav" title="Ciekawostki"><i
+                        class="far fa-lightbulb"></i></button>
+                <button id="nav_info" class="app-btn app-btn--nav" title="Informacje"><i
+                        class="fas fa-info-circle"></i></button>
+            </nav>
+        </header>
+        <main>
+            <section id="searchContainer" class="sectionContainer sectionContainer--search">
                 <h2>Wyszukaj waluty</h2>
-                <form action="">
-                    <p>Waluta</p>
-                    <select id="search__form--currencyCode">
+                <form>
+                    <p>Waluta:</p>
+                    <select id="form_search-currencyCode">
                         <option value="default">Wybierz walutę z listy</option>
                     </select>
-                    <p>Ilość ostatnich notowań</p>
-                    <div id="search__form--ratesQuantity">
-                        <button class="search__form--changeQuantity down">-</button>
-                        <input type="number" value="15">
-                        <button class="search__form--changeQuantity up">+</button>
+                    <p>Ilość ostatnich notowań:</p>
+                    <div class="inputQuantity-container inputQuantity-container--search">
+                        <button class="form_search-changeQuantity app-btn app-btn--quantity down">-</button>
+                        <input type="number" value="15" max="99">
+                        <button class="form_search-changeQuantity app-btn app-btn--quantity up">+</button>
                     </div>
-                    <button id="search__form--button" class="start">Szukaj</button>
+                    <button id="form_search-button" class="app-btn app-btn--container">Szukaj</button>
                 </form>
             </section>
-            <section id="calculatorContainer" class="mainContainer__containers">
+            <section id="calculatorContainer" class="sectionContainer sectionContainer--calculator">
                 <h2>Kalkulator</h2>
-                <form action="">
-                    <div id="calculator__form--options">
+                <form>
+                    <div id="form_calculator-options">
                         <p>Twoja waluta</p>
-                        <select id="calculator__form--from" class="calculator__form--select">
+                        <select id="form_calculator-from" class="form_calculator-select">
                             <option value="default">Wybierz walutę z listy</option>
                             <option value="PLN">PLN - polski złoty</option>
                         </select>
                         <p>Przelicz na</p>
-                        <select id="calculator__form--to" class="calculator__form--select">
+                        <select id="form_calculator-to" class="form_calculator-select">
                             <option value="default">Wybierz walutę z listy</option>
                             <option value="PLN">PLN - polski złoty</option>
                         </select>
                     </div>
-                    <div id="calculator__form--result">
-                        <div class="calculator__form--result-container">
-                            <input type="number" id="" placeholder="Ilość">
-                            <span>PLN</span>
+                    <div id="form_calculator-result">
+                        <div class="form_calculator-resultContainer">
+                            <input type="number" id="form_calculator-result-from" placeholder="Twoja waluta">
+                            <span></span>
                         </div>
                         <span>=</span>
-                        <div class="calculator__form--result-container">
-                            <input type="text" disabled>
-                            <span>PLN</span>
+                        <div class="form_calculator-resultContainer">
+                            <input type="text" id="form_calculator-result-to" disabled>
+                            <span></span>
                         </div>
                     </div>
-                    <button id="calculator__form--button" class="start">Dalej</button>
+                    <button id="form_calculator-button" class="app-btn app-btn--container">Dalej</button>
                 </form>
             </section>
-            <section id="curiositesContainer" class="mainContainer__containers"></section>
+            <section id="curiositesContainer" class="sectionContainer sectionContainer--curiosites">
+                <h2>Ciekawostki</h2>
+                <form>
+                    <p>Wylosowana ciekawostka:</p>
+                    <p class="curiosity"><span></span><span>|</span></p>
+                </form>
+                <button id="drawCuriosity" class="app-btn app-btn--container">Losuj ciekawostkę</button>
+            </section>
+        </main>
+    </div>
+    <div class="modal">
+        <div style="text-align: center;">
+            <h3 class="modal__title"></h3>
         </div>
-    </main>
+        <div class="modal__container">
+
+            <div class="modal__content"></div>
+            <button class="modal__close app-btn--close" title="Zamknij"><i class="far fa-times-circle"></i></button>
+        </div>
+    </div>
     <canvas id="background"></canvas>
+    <div id="chartContainer">
+        <!-- <canvas id="myChart" width="200" height="800"></canvas> -->
+        <button class="chartContainer__close app-btn--close" title="Zamknij"><i class="far fa-times-circle"></i></button>
+    </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="src/index.js" type="module"></script>
 </body>
 

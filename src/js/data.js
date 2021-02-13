@@ -1,14 +1,14 @@
 export default class Data {
     constructor() {
-        this.currenciesDatas = [];
+        this.currenciesData = [];
         this.uploadingDate;
 
-        this.getCurrenciesDatas = () => {
+        this.getCurrenciesData = () => {
             return new Promise((resolve, reject) => {
                 axios.get(`https://api.nbp.pl/api/exchangerates/tables/a`)
-                    .then(res => {
-                        this.currenciesDatas = res.data[0].rates;
-                        this.uploadingDate = res.data[0].effectiveDate;
+                    .then(result => {
+                        this.currenciesData = result.data[0].rates;
+                        this.uploadingDate = result.data[0].effectiveDate;
                         resolve();
                     })
                     .catch(() => reject(new Error('Cannot found data')))
@@ -19,10 +19,10 @@ export default class Data {
             days++;
             return new Promise((resolve, reject) => {
                 axios.get(`https://api.nbp.pl/api/exchangerates/rates/A/${currencyCode}/last/${days}`)
-                    .then(res => {
-                        resolve(res.data.rates);
+                    .then(result => {
+                        resolve(result.data.rates);
                     })
-                    .catch(err => reject(err));
+                    .catch(reason => reject(reason));
             })
         }
     }

@@ -1,10 +1,13 @@
 @keyframes showContainer {
     0% {
-        transform: translateX(100vw);
+        transform: translateX(100vw) scale(.2);
+    }
+    90% {
+        transform: translateX(0) scale(.9);
     }
 
     100% {
-        transform: translateX(0);
+        transform: translateX(0) scale(1);
     }
 }
 
@@ -15,5 +18,47 @@
 
     100% {
         transform: translateX(-100vw);
+    }
+}
+
+@keyframes btnAnimation {
+    0% {
+        transform: rotate(0) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(0);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes showModal {
+    0% {
+        transform: translate(-50%, -75%) scale(0);
+    }
+
+    100% {
+        transform: translate(-50%, -75%) scale(1);
+    }
+}
+
+@keyframes showCloseBtn {
+    0%{
+        transform: scale(0);
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes blur {
+    100% {
+        filter: blur(10px);
     }
 }

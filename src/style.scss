@@ -1,7 +1,12 @@
 @import 'scss/variables';
 @import 'scss/keyframes';
-@import 'scss/main';
-@import 'scss/media';
+@import 'scss/scrollbar';
+@import 'scss/components/modal';
+@import 'scss/components/button';
+@import 'scss/components/header';
+@import 'scss/components/mainContainer';
+@import 'scss/components/background';
+@import 'scss/components/chart';
 
 * {
     margin: 0;
@@ -12,28 +17,31 @@
     // border: 1px solid red;
 }
 
-::-webkit-scrollbar {
-    width: 15px;
+.wrapper.blurred,
+.wrapper.blurred~canvas#background {
+    pointer-events: none;
+    animation: .1s blur linear both;
 }
 
-::-webkit-scrollbar-track {
-    background-color: $header-color;
+body {
+    min-height: 100vh;
+    font-size: 18px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    background-color: black;
+    overflow-x: hidden;
 }
 
-::-webkit-scrollbar-thumb {
-    background: $additional-font-color;
-    border: 5px solid $header-color;
+@media (max-width: 1024px){
+    body {
+        font-size: 16px;
+    }
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgb(161, 158, 158);
+@media (max-width: 640px) {
+    body {
+        font-size: 14px;
+    }
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-}
-
-button {
-    cursor: pointer;
-}
