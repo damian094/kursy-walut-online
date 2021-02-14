@@ -82,23 +82,23 @@
 
 @-webkit-keyframes showModal {
   0% {
-    -webkit-transform: translate(-50%, -75%) scale(0);
-            transform: translate(-50%, -75%) scale(0);
+    -webkit-transform: translate(-50%, -60%) scale(0);
+            transform: translate(-50%, -60%) scale(0);
   }
   100% {
-    -webkit-transform: translate(-50%, -75%) scale(1);
-            transform: translate(-50%, -75%) scale(1);
+    -webkit-transform: translate(-50%, -60%) scale(1);
+            transform: translate(-50%, -60%) scale(1);
   }
 }
 
 @keyframes showModal {
   0% {
-    -webkit-transform: translate(-50%, -75%) scale(0);
-            transform: translate(-50%, -75%) scale(0);
+    -webkit-transform: translate(-50%, -60%) scale(0);
+            transform: translate(-50%, -60%) scale(0);
   }
   100% {
-    -webkit-transform: translate(-50%, -75%) scale(1);
-            transform: translate(-50%, -75%) scale(1);
+    -webkit-transform: translate(-50%, -60%) scale(1);
+            transform: translate(-50%, -60%) scale(1);
   }
 }
 
@@ -182,30 +182,35 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: left;
   color: #bbb;
   background-color: #111111;
-  -webkit-transform: translate(-50%, -75%);
-          transform: translate(-50%, -75%);
   overflow: hidden;
 }
 
 .modal.active {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   z-index: 1;
   -webkit-animation: .3s showModal linear both;
           animation: .3s showModal linear both;
-}
-
-.modal__container {
-  height: 160px;
-  max-height: 160px;
-  width: 100%;
-  margin: 0 auto;
-  overflow-y: scroll;
 }
 
 .modal__title {
   line-height: 60px;
   font-size: 1.5em;
   color: #B29700;
+}
+
+.modal__container {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: scroll;
 }
 
 .modal__content {
@@ -243,6 +248,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   -webkit-animation: .3s showCloseBtn linear both;
           animation: .3s showCloseBtn linear both;
+  overflow: hidden;
 }
 
 @media (max-width: 1024px) {
@@ -253,8 +259,18 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media (max-width: 640px) {
   .modal {
-    width: 300px;
-    padding: 0 10px 0 10px;
+    width: 95vw;
+    padding: 0 10px 10px 10px;
+    height: 200px;
+  }
+  .modal__content {
+    font-size: .85em;
+  }
+  .modal__content li {
+    line-height: 18px;
+  }
+  .modal__content li::before {
+    top: 9px;
   }
 }
 
@@ -441,6 +457,25 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
+@media (max-width: 640px) {
+  .app-btn--container {
+    margin-top: 50px;
+    padding: 2px 40px;
+  }
+  .app-btn--quantity {
+    width: 50px;
+    font-size: 1.2em;
+  }
+  .app-btn--close {
+    right: 0px;
+    top: 0px;
+  }
+  .app-btn--chart {
+    margin: 25px 0;
+    padding: 5px 25px;
+  }
+}
+
 header {
   position: fixed;
   width: 100%;
@@ -512,7 +547,7 @@ header nav {
 
 @media (max-width: 640px) {
   header a h1 {
-    font-size: 2.2em;
+    font-size: 2.5em;
   }
 }
 
@@ -706,8 +741,8 @@ main .sectionContainer {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  min-height: 500px;
   padding-top: 50px;
+  padding-bottom: 20px;
   color: #ddd;
 }
 
@@ -867,6 +902,9 @@ main .sectionContainer--curiosites .curiosity span:nth-of-type(2) {
 }
 
 @media (max-width: 640px) {
+  main .currencyContainer {
+    padding: 0 0 30px;
+  }
   main .currencyContainer .mainInfo .name .icon {
     width: 30px;
     height: 25px;
@@ -881,17 +919,25 @@ main .sectionContainer--curiosites .curiosity span:nth-of-type(2) {
     line-height: 45px;
   }
   main .currencyContainer .otherInfo .paragraphsContainer {
-    max-height: 225px;
+    max-height: 150px;
   }
   main .currencyContainer .otherInfo .paragraphsContainer p {
     height: 15px;
   }
   main .sectionContainer {
     padding-top: 10px;
-    font-size: 0.9em;
+  }
+  main .sectionContainer form p {
+    padding-top: 20px;
+    padding-bottom: 3px;
+    font-size: 1.3em;
+  }
+  main .sectionContainer form input,
+  main .sectionContainer form select {
+    padding: 2px 6px;
   }
   main .sectionContainer--curiosites form {
-    width: 250px;
+    width: 90vw;
   }
 }
 
@@ -947,15 +993,14 @@ canvas#background {
   outline: none;
 }
 
-.wrapper.blurred,
-.wrapper.blurred ~ canvas#background {
-  pointer-events: none;
-  -webkit-animation: .1s blur linear both;
-          animation: .1s blur linear both;
+body,
+html {
+  overflow-x: hidden;
 }
 
 body {
-  min-height: 100vh;
+  position: static;
+  height: 100vh;
   font-size: 18px;
   display: -ms-grid;
   display: grid;
@@ -964,7 +1009,13 @@ body {
   -ms-grid-rows: auto 1fr;
       grid-template-rows: auto 1fr;
   background-color: black;
-  overflow-x: hidden;
+}
+
+body .wrapper.blurred,
+body .wrapper.blurred ~ canvas#background {
+  pointer-events: none;
+  -webkit-animation: .1s blur linear both;
+          animation: .1s blur linear both;
 }
 
 @media (max-width: 1024px) {
@@ -975,6 +1026,6 @@ body {
 
 @media (max-width: 640px) {
   body {
-    font-size: 14px;
+    font-size: 15px;
   }
 }

@@ -64,6 +64,8 @@ export default class CurrencyContainer {
                         paragraphsContainer.classList.add('paragraphsContainer');
                         if (lastRates.length > 15) {
                             paragraphsContainer.classList.add('scrollable');
+                        } else if (lastRates.length > 10 && window.matchMedia('(max-width: 640px)').matches) {
+                            paragraphsContainer.classList.add('scrollable');
                         }
                         otherInfoDiv.appendChild(paragraphsContainer);
                         for (let i = lastRates.length - 1; i >= 0; i--) {

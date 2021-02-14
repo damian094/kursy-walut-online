@@ -27,6 +27,7 @@
             color: $additional-font-color;
         }
     }
+
     &--container {
         position: relative;
         margin-top: 60px;
@@ -57,6 +58,7 @@
             top: -50%;
         }
     }
+
     &--quantity {
         position: relative;
         width: 40px;
@@ -114,6 +116,7 @@
             }
         }
     }
+
     &--close {
         justify-content: center;
         align-items: center;
@@ -137,6 +140,7 @@
             transform: rotate(90deg) scale(1.15);
         }
     }
+
     &--chart {
         border: 0;
         margin: 30px 0;
@@ -144,6 +148,7 @@
         background-color: transparent;
         font-size: 1.2em;
         font-weight: bold;
+
         &:hover {
             transform: scale(1);
         }
@@ -151,14 +156,39 @@
 }
 
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .app-btn {
-        &--nav{
+        &--nav {
             flex-basis: 25%;
             margin: 0 0;
             padding-top: 3px;
             border-bottom: 2px solid $light-font-color;
             font-size: 1.4em;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .app-btn {
+
+        &--container {
+            margin-top: 50px;
+            padding: 2px 40px;
+        }
+
+        &--quantity {
+            width: 50px;
+            font-size: 1.2em;
+        }
+
+        &--close {
+            right: 0px;
+            top: 0px;
+        }
+
+        &--chart {
+            margin: 25px 0;
+            padding: 5px 25px;
         }
     }
 }

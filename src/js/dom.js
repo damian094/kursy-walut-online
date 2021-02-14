@@ -11,6 +11,20 @@ export default class DOM {
         const typeCharacter = typeOfWriting === 'letter' ? true : false;
         const reverse = isReverse || false;
 
+        //checks if callback is inside modal
+        const callbackInsideModal = element.parentNode.parentNode.classList.contains('modal__container') ? true : false;
+        let modalTextContainer;
+        let scrollModal;
+        if (callbackInsideModal) {
+            modalTextContainer = element.parentNode.parentNode;
+            scrollModal = () => {
+                modalTextContainer.scrollTo({
+                    top: modalTextContainer.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
         return new Promise(resolve => {
             if (!reverse) {
                 const endTxt = text.split('');
@@ -21,6 +35,9 @@ export default class DOM {
                     element.textContent = displayedTxt;
                     if (displayedTxt.length === text.length) {
                         clearInterval(interval);
+                        if (callbackInsideModal) {
+                            scrollModal();
+                        }
                         resolve();
                     }
                 }, typeCharacter ? time : time / endTxt.length)

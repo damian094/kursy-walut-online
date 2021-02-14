@@ -155,8 +155,8 @@ main {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        min-height: 500px;
         padding-top: 50px;
+        padding-bottom: 20px;
         color: #ddd;
 
         h2 {
@@ -281,17 +281,6 @@ main {
 
 @media (max-width: 768px) {
     main {
-        // .currencyContainer {
-        //     &.withoutOtherInfo {
-        //         flex-basis: 100%;
-        //         padding: 20px 0 0;
-
-        //         .otherInfo {
-        //             display: none;
-        //         }
-        //     }
-        // }
-
         .sectionContainer {
             padding-top: 20px;
 
@@ -308,6 +297,7 @@ main {
 @media (max-width: 640px) {
     main {
         .currencyContainer {
+            padding: 0 0 30px;
             .mainInfo {
                 .name {
                     .icon {
@@ -329,7 +319,7 @@ main {
                 }
 
                 .paragraphsContainer {
-                    max-height: 225px;
+                    max-height: 150px;
 
                     p {
                         height: 15px;
@@ -340,11 +330,27 @@ main {
 
         .sectionContainer {
             padding-top: 10px;
-            font-size: 0.9em;
+
+            // h2 {
+            //     // font-size: 1.8em;
+            // }
+
+            form {
+                p {
+                    padding-top: 20px;
+                    padding-bottom: 3px;
+                    font-size: 1.3em;
+                }
+
+                input,
+                select {
+                    padding: 2px 6px;
+                }
+            }
 
             &--curiosites {
                 form {
-                    width: 250px;
+                    width: 90vw;
                 }
             }
         }
