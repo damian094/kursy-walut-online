@@ -1,100 +1,100 @@
 export default class DOM {
-    static random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    // static random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-    static textWriting(element, text, time, typeOfWriting, isReverse) {
-        //element - DOM element in which you want to write
-        //text - the text to write
-        //time - animation duration
-        //type (letter/all) - type of animation duration (time for one letter or time for all text)
-        //reverse (true/false)
+    // static textWriting(element, text, time, typeOfWriting, isReverse) {
+    //     //element - DOM element in which you want to write
+    //     //text - the text to write
+    //     //time - animation duration
+    //     //type (letter/all) - type of animation duration (time for one letter or time for all text)
+    //     //reverse (true/false)
 
-        const typeCharacter = typeOfWriting === 'letter' ? true : false;
-        const reverse = isReverse || false;
+    //     const typeCharacter = typeOfWriting === 'letter' ? true : false;
+    //     const reverse = isReverse || false;
 
-        //checks if callback is inside modal
-        const callbackInsideModal = element.parentNode.parentNode.classList.contains('modal__container') ? true : false;
-        let modalTextContainer;
-        let scrollModal;
-        if (callbackInsideModal) {
-            modalTextContainer = element.parentNode.parentNode;
-            scrollModal = () => {
-                modalTextContainer.scrollTo({
-                    top: modalTextContainer.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }
-        }
+    //     //checks if callback is inside modal
+    //     const callbackInsideModal = element.parentNode.parentNode.classList.contains('modal__container') ? true : false;
+    //     let modalTextContainer;
+    //     let scrollModal;
+    //     if (callbackInsideModal) {
+    //         modalTextContainer = element.parentNode.parentNode;
+    //         scrollModal = () => {
+    //             modalTextContainer.scrollTo({
+    //                 top: modalTextContainer.scrollHeight,
+    //                 behavior: 'smooth'
+    //             });
+    //         }
+    //     }
 
-        return new Promise(resolve => {
-            if (!reverse) {
-                const endTxt = text.split('');
-                let displayedTxt = '';
-                let i = 0;
-                let interval = setInterval(() => {
-                    displayedTxt += endTxt[i++];
-                    element.textContent = displayedTxt;
-                    if (displayedTxt.length === text.length) {
-                        clearInterval(interval);
-                        if (callbackInsideModal) {
-                            scrollModal();
-                        }
-                        resolve();
-                    }
-                }, typeCharacter ? time : time / endTxt.length)
-            } else {
-                let displayedTxt = text;
-                let interval = setInterval(() => {
-                    displayedTxt = displayedTxt.slice(0, -1);
-                    element.textContent = displayedTxt;
-                    if (!displayedTxt.length) {
-                        clearInterval(interval);
-                        resolve();
-                    }
-                }, typeCharacter ? time : time / endTxt.length)
-            }
-        })
+    //     return new Promise(resolve => {
+    //         if (!reverse) {
+    //             const endTxt = text.split('');
+    //             let displayedTxt = '';
+    //             let i = 0;
+    //             let interval = setInterval(() => {
+    //                 displayedTxt += endTxt[i++];
+    //                 element.textContent = displayedTxt;
+    //                 if (displayedTxt.length === text.length) {
+    //                     clearInterval(interval);
+    //                     if (callbackInsideModal) {
+    //                         scrollModal();
+    //                     }
+    //                     resolve();
+    //                 }
+    //             }, typeCharacter ? time : time / endTxt.length)
+    //         } else {
+    //             let displayedTxt = text;
+    //             let interval = setInterval(() => {
+    //                 displayedTxt = displayedTxt.slice(0, -1);
+    //                 element.textContent = displayedTxt;
+    //                 if (!displayedTxt.length) {
+    //                     clearInterval(interval);
+    //                     resolve();
+    //                 }
+    //             }, typeCharacter ? time : time / endTxt.length)
+    //         }
+    //     })
 
-    }
+    // }
 
-    static showModal(title, ...texts) {
-        const wrapper = document.querySelector('.wrapper');
-        const modal = document.querySelector('.modal');
-        const modalTitle = document.querySelector('.modal__title');
-        const modalContent = document.querySelector('.modal__content');
-        modalTitle.textContent = title;
+    // static showModal(title, ...texts) {
+    //     const wrapper = document.querySelector('.wrapper');
+    //     const modal = document.querySelector('.modal');
+    //     const modalTitle = document.querySelector('.modal__title');
+    //     const modalContent = document.querySelector('.modal__content');
+    //     modalTitle.textContent = title;
 
-        const closeModal = () => {
-            modalTitle.textContent = 'Błąd';
-            modalContent.innerHTML = '';
-            modal.classList.remove('active');
-            wrapper.classList.remove('blurred');
-            closeBtn.classList.remove('active')
-        }
+    //     const closeModal = () => {
+    //         modalTitle.textContent = 'Błąd';
+    //         modalContent.innerHTML = '';
+    //         modal.classList.remove('active');
+    //         wrapper.classList.remove('blurred');
+    //         closeBtn.classList.remove('active')
+    //     }
 
-        const closeBtn = document.querySelector('.modal__close');
-        closeBtn.addEventListener('click', closeModal);
+    //     const closeBtn = document.querySelector('.modal__close');
+    //     closeBtn.addEventListener('click', closeModal);
 
-        //show modal and render li
-        setTimeout(() => {
-            (async function loop() {
-                for (let i = 0; i < texts.length; i++) {
-                    await new Promise(resolve => {
-                        const newLi = document.createElement('li');
-                        modalContent.appendChild(newLi);
-                        DOM.textWriting(newLi, texts[i], texts[i].length * 20)
-                            .then(() => setTimeout(resolve, 200))
-                    }).then(() => {
-                        if (i === texts.length - 1) {
-                            closeBtn.classList.add('active');
-                        }
-                    })
-                }
-            })();
-        }, 400)
+    //     //show modal and render li
+    //     setTimeout(() => {
+    //         (async function loop() {
+    //             for (let i = 0; i < texts.length; i++) {
+    //                 await new Promise(resolve => {
+    //                     const newLi = document.createElement('li');
+    //                     modalContent.appendChild(newLi);
+    //                     DOM.textWriting(newLi, texts[i], texts[i].length * 20)
+    //                         .then(() => setTimeout(resolve, 200))
+    //                 }).then(() => {
+    //                     if (i === texts.length - 1) {
+    //                         closeBtn.classList.add('active');
+    //                     }
+    //                 })
+    //             }
+    //         })();
+    //     }, 400)
 
-        modal.classList.add('active');
-        wrapper.classList.add('blurred');
-    }
+    //     modal.classList.add('active');
+    //     wrapper.classList.add('blurred');
+    // }
 
     constructor(data) {
         const currenciesData = [...data.sort((a, b) => (a.code > b.code) ? 1 : -1)];
